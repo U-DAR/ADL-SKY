@@ -146,19 +146,44 @@
       
       <h2>سجل اهتمامك</h2>
       
-      <form action="your-server-endpoint" method="POST" style="display: flex; flex-direction: column; align-items: center;">
-        <input type="text" placeholder="الاسم الكامل" required style="margin: 10px; width: 250px;">
-        <input type="email" placeholder="البريد الإلكتروني" required style="margin: 10px; width: 250px;">
-        <input type="tel" placeholder="رقم الهاتف" style="margin: 10px; width: 250px;">
+      <form id="form" style="display: flex; flex-direction: column; align-items: center;">
+        <input type="text" id="name" placeholder="الاسم الكامل" required style="margin: 10px; width: 250px;">
+        <input type="tel" id="phone" placeholder="رقم الهاتف" required style="margin: 10px; width: 250px;">
         <button type="submit" style="margin: 10px; width: 250px; text-align: center;">أرسل</button>
       </form>
     </div>
   </div>
 
   <script>
-    document.querySelector('form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('تم إرسال البيانات!');
+    document.getElementById("form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // جمع البيانات من النموذج
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+
+      // رابط API الذي حصلت عليه من NoCodeAPI
+      const apiURL = "https://v1.nocodeapi.com/USERNAME/google_sheets/API_KEY?tabId=Sheet1";
+
+      // إرسال البيانات إلى API
+      fetch(apiURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          phone: phone
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert("تم إرسال البيانات بنجاح!");
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("حدث خطأ أثناء إرسال البيانات.");
+      });
     });
   </script>
 
