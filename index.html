@@ -151,7 +151,7 @@
 
       <h2>سجل اهتمامك</h2>
       
-      <!-- نموذج تسجيل بسيط -->
+      <!-- نموذج تسجيل بيانات -->
       <form id="form" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
         <input type="text" id="name" placeholder="الاسم الكامل" required style="margin: 10px;">
         <input type="tel" id="phone" placeholder="رقم الهاتف" required style="margin: 10px;">
@@ -159,6 +159,40 @@
       </form>
     </div>
   </div>
+
+  <!-- JavaScript لإرسال البيانات إلى Google Sheets باستخدام API -->
+  <script>
+    document.getElementById("form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // جمع البيانات من النموذج
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+
+      // رابط Google Sheets API مع API Key
+      const apiURL = "https://v1.nocodeapi.com/USERNAME/google_sheets/AIzaSyCOVv3s14U-iKKV0iR_L5l-xjtYR6zv3bs?tabId=Sheet1";
+
+      // إرسال البيانات إلى Google Sheets عبر API
+      fetch(apiURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          phone: phone
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert("تم إرسال البيانات بنجاح!");
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("حدث خطأ أثناء إرسال البيانات.");
+      });
+    });
+  </script>
 
 </body>
 </html>
