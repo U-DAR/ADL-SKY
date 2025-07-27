@@ -170,7 +170,7 @@
       const phone = document.getElementById("phone").value;
 
       // رابط Google Sheets API مع API Key
-      const apiURL = "https://sheets.googleapis.com/v4/spreadsheets/1abcDfgHIJKLMNOPQWERTY/values/Sheet1!A1:B1?key=AIzaSyCOVv3s14U-iKKV0iR_L5l-xjtYR6zv3bs";
+      const apiURL = "https://sheets.googleapis.com/v4/spreadsheets/1u1LnviYJgSlYF41uRJ-FQpRQqK_AUJ8MS7e-G5cIrxw/values/Sheet1!B2:C2?key=AIzaSyCOVv3s14U-iKKV0iR_L5l-xjtYR6zv3bs";
 
       // إرسال البيانات إلى Google Sheets عبر API
       fetch(apiURL, {
@@ -179,7 +179,7 @@
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          values: [[name, phone]] // إرسال البيانات للصف الأول في الأعمدة A و B
+          values: [[name, phone]] // إرسال البيانات للصف الثاني في الأعمدة B و C
         })
       })
       .then(response => response.json())
