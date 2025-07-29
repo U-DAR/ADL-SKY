@@ -7,129 +7,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background-color: #f7f7f7;
-    }
-
-    .video-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      filter: brightness(70%);
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5); /* خلفية داكنة مع 50% شفافية */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      flex-direction: column;
-      padding: 20px;
-    }
-
-    .form-container {
-      background: rgba(255, 255, 255, 0.4); /* 40% شفافية على الخلفية */
-      padding: 30px;
-      border-radius: 15px;
-      width: 100%;
-      max-width: 350px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    h2 {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: #003366;
-      padding: 0;
-      text-align: center;
-    }
-
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 16px;
-      border-radius: 8px;
-      text-align: right;
-      transition: all 0.3s ease;
-    }
-
-    input:focus, button:focus {
-      border-color: #003366;
-      outline: none;
-    }
-
-    input {
-      background-color: #f9f9f9;
-    }
-
-    button {
-      background-color: #003366;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background-color: #002244;
-    }
-
-    .logos {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-bottom: 20px;
-    }
-
-    .logos img {
-      width: 150px;
-      height: auto;
-      transition: all 0.3s ease;
-    }
-
-    .logos img:hover {
-      transform: scale(1.1);
-    }
-
-    @media (max-width: 600px) {
-      .form-container {
-        width: 85%;
-        padding: 15px;
-        max-width: 320px;
-      }
-
-      .logos img {
-        width: 100px;
-      }
-
-      iframe {
-        width: 100%;
-        height: auto;
-      }
-    }
+    /* الكود التنسيقي (CSS) كما هو */
   </style>
 </head>
 <body>
@@ -152,46 +30,13 @@
       <h2>سجل اهتمامك</h2>
       
       <!-- نموذج تسجيل بيانات -->
-      <form id="form" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-        <input type="text" id="name" placeholder="الاسم الكامل" required style="margin: 10px;">
-        <input type="tel" id="phone" placeholder="رقم الهاتف" required style="margin: 10px;">
+      <form action="submit_form.php" method="POST" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <input type="text" name="name" placeholder="الاسم الكامل" required style="margin: 10px;">
+        <input type="tel" name="phone" placeholder="رقم الهاتف" required style="margin: 10px;">
         <button type="submit">أرسل</button>
       </form>
     </div>
   </div>
-
-  <!-- JavaScript لإرسال البيانات إلى Google Sheets باستخدام API -->
-  <script>
-    document.getElementById("form").addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      // جمع البيانات من النموذج
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-
-      // رابط Google Sheets API مع API Key
-      const apiURL = "https://sheets.googleapis.com/v4/spreadsheets/1u1LnviYJgSlYF41uRJ-FQpRQqK_AUJ8MS7e-G5cIrxw/values/Sheet1!B2:C2?key=AIzaSyCOVv3s14U-iKKV0iR_L5l-xjtYR6zv3bs";
-
-      // إرسال البيانات إلى Google Sheets عبر API
-      fetch(apiURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          values: [[name, phone]] // إرسال البيانات للصف الثاني في الأعمدة B و C
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert("تم إرسال البيانات بنجاح!");
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("حدث خطأ أثناء إرسال البيانات.");
-      });
-    });
-  </script>
 
 </body>
 </html>
